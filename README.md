@@ -6,3 +6,5 @@ Highlight and copy the text from the parser and paste it into the wordSearch.txt
 Run the application in Visual Studio.  
 Follow the instructions in the console (enter the word in all caps).  
 Done!  
+
+As a side note, I will eventually find time to learn how to build an interface and improve upon this application after that.
