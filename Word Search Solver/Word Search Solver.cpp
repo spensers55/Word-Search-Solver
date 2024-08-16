@@ -48,7 +48,7 @@ private:
             for (int j = 0; j < wordSearch[i].size(); j++) {
                 done = check(i, j);
                 if (done) {
-                    string output = "Word found at row: " + to_string(i + 1) + ", column: " + to_string(j + 1) + ", heading: " + directionKey[rowDir+1][colDir+1] + "."; // plus one to fix index positioning
+                    string output = "Word found at row: " + to_string(i + 1) + ", column: " + to_string(j + 1) + ", heading: " + directionKey[rowDir+1][colDir+1] + ".\n"; // plus one to fix index positioning
                     cout << output;
                     return;
                 }
@@ -72,27 +72,27 @@ private:
                 colDir = 0;
                 found = line(row + rowDir, col + colDir, depth + 1); // function call to line
             }
-            if (row >= word.size() && col < (wordSearch[row].size() - word.size()) && !found) { // checks to the northeast
+            if (row >= word.size() && col < (wordSearch[row].size() - word.size()+1) && !found) { // checks to the northeast
                 rowDir = -1;
                 colDir = 1;
                 found = line(row + rowDir, col + colDir, depth + 1); // function call to line
             }
-            if (col < (wordSearch[row].size() - word.size()) && !found) { // checks to the east
+            if (col < (wordSearch[row].size() - word.size()+1) && !found) { // checks to the east
                 rowDir = 0;
                 colDir = 1;
                 found = line(row + rowDir, col + colDir, depth + 1); // function call to line
             }
-            if (row < (wordSearch->size() - word.size()) && col < (wordSearch[row].size() - word.size()) && !found) { // checks to the southeast
+            if (row < (wordSearch->size() - word.size()+1) && col < (wordSearch[row].size() - word.size()+1) && !found) { // checks to the southeast
                 rowDir = 1;
                 colDir = 1;
                 found = line(row + rowDir, col + colDir, depth + 1); // function call to line
             }
-            if (row < (wordSearch->size() - word.size()) && !found) { // checks to the south
+            if (row < (wordSearch->size() - word.size()+1) && !found) { // checks to the south
                 rowDir = 1;
                 colDir = 0;
                 found = line(row + rowDir, col + colDir, depth + 1); // function call to line
             }
-            if (row < (wordSearch->size() - word.size()) && col >= word.size() && !found) { // checks to the southwest
+            if (row < (wordSearch->size() - word.size()+1) && col >= word.size() && !found) { // checks to the southwest
                 rowDir = 1;
                 colDir = -1;
                 found = line(row + rowDir, col + colDir, depth + 1); // function call to line
@@ -229,8 +229,11 @@ int main()
     cin >> col;
     Prepare prepare(col);
 
+
     getline(cin, word);
-    cout << "What word are you looking for?" << endl;
-    getline(cin, word);
-    Solver solver(word);
+    while (true) {
+        cout << "What word are you looking for?" << endl;
+        getline(cin, word);
+        Solver solver(word);
+    }
 }
